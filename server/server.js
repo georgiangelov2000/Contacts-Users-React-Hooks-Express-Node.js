@@ -11,10 +11,11 @@ app.use(express.json({ extended: false }));
 
 const users = require("./routes/users");
 const login=require("./routes/login");
+const contacts=require("./routes/contacts");
 
 app.use("/api/users", users);
-app.use('/api/users/auth',login);
-
+app.use("/api/users/auth",login);
+app.use("/api/contacts", contacts);
 const PORT = 8000;
 
 app.listen(PORT, () => {
