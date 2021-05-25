@@ -18,7 +18,7 @@ router.get('/authorization',authMiddleware,async(req,res)=>{
     }
 })
 
-router.get(
+router.post(
   "/login",
   [
     check("email", "Please include a valid email").isEmail(),
