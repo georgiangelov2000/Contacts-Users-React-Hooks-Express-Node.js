@@ -10,7 +10,9 @@ import
    LOGIN_SUCCESS,
    LOGIN_FAIL,
    USER_LOADED,
-   AUTH_ERROR } from "./types";
+   AUTH_ERROR,
+   LOGOUT
+  } from "./types";
 
 const AuthState = (props) => {
   const initalState = {
@@ -35,7 +37,6 @@ const AuthState = (props) => {
         type:AUTH_ERROR
       })
     }
-   
   }
 
   const register = async (formData) => {
@@ -58,7 +59,6 @@ const AuthState = (props) => {
         payload: error.response.data.msg,
       });
     }
-
   };
 
   const login=async (formData) =>{
@@ -81,8 +81,9 @@ const AuthState = (props) => {
         payload:error.response.data.msg
       })
     }
+  };
 
-  }
+  const logout =()=>dispatch({type:LOGOUT})
 
 
   return (
@@ -94,6 +95,7 @@ const AuthState = (props) => {
         register,
         login,
         loadUser,
+        logout,
       }}
     >
       {props.children}
