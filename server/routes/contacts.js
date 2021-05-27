@@ -5,6 +5,18 @@ const auth = require("../middleware/authMiddleware");
 
 const Contact = require("../models/Contacts");
 
+router.get('/contacts', auth, async (req, res) => {
+  try {
+    const contacts = await Contact.find({user: req.user.id}).sort({
+      date: -1,
+    });
+    res.json(contacts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 router.post(
   "/create-contact",
   [auth, [check("name", "Name is required").not().isEmpty()]],

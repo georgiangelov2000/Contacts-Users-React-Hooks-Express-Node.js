@@ -30,6 +30,16 @@ const Navbar = () => {
             Logout
           </Button>
         </Nav.Item>
+        <Nav.Item>
+          <LinkContainer to="/contact-form">
+            <Nav.Link className="text-white">Contact Form</Nav.Link>
+          </LinkContainer>
+        </Nav.Item>
+        <Nav.Item>
+          <LinkContainer to="/contacts">
+            <Nav.Link className="text-white">Contacts</Nav.Link>
+          </LinkContainer>
+        </Nav.Item>
       </Nav>
     </>
   );
