@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import ContactContext from "../../../context/contacts/contactContext";
+import {useHistory} from "react-router-dom";
 
 const ContactForm = () => {
+  let history=useHistory();
   const contactContext = useContext(ContactContext);
   const { addContact, current, clearCurrentContact } = contactContext;
 
@@ -35,7 +37,7 @@ const ContactForm = () => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
-      console.log("success");
+      history.push('/contacts')
     }
     clearAll();
   };

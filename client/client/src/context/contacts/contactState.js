@@ -12,6 +12,7 @@ import {
   SET_CURRENT,
   CONTACT_ERROR,
   CLEAR_CURRENT,
+  CLEAR_FILTER
 } from "./types";
 
 const ContactState = (props) => {
@@ -71,6 +72,37 @@ const ContactState = (props) => {
     });
   };
 
+  const deleteContact = async id => {
+    try {
+        await axios.delete(`http://localhost:8000/api/contacts/delete/${id}`)
+    
+        dispatch({
+            type:DELETE_CONTACT,
+            payload: id
+        })
+
+    } catch (error) {
+        dispatch({
+            type: CONTACT_ERROR,
+            payload: error.response.msg
+        })
+    }
+  }
+
+  const filterContacts =text=>{
+      dispatch({
+          type:FILTER_CONTACTS,
+          payload:text
+      })
+  }
+
+  const clearFilter=()=>{
+      dispatch({
+          type:CLEAR_FILTER
+      })
+  }
+
+
   return (
     <ContactContext.Provider
       value={{
@@ -80,7 +112,10 @@ const ContactState = (props) => {
         error: state.error,
         addContact,
         clearCurrentContact,
-        getContacts
+        getContacts,
+        deleteContact,
+        filterContacts,
+        clearFilter
       }}
     >
       {props.children}

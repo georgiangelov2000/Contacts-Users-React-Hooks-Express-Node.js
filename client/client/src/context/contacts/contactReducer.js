@@ -7,15 +7,16 @@ import {
   SET_CURRENT,
   CONTACT_ERROR,
   CLEAR_CURRENT,
+  CLEAR_FILTER
 } from "./types";
 
 export default (state, action) => {
   switch (action.type) {
     case GET_CONTACTS:
-        return {
-            ...state,
-            contacts: action.payload,
-        }
+      return {
+        ...state,
+        contacts: action.payload,
+      };
     case ADD_CONTACT:
       return {
         ...state,
@@ -27,6 +28,26 @@ export default (state, action) => {
         ...state,
         current: null,
       };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact) => contact._id !== action.payload
+        ),
+      };
+    case FILTER_CONTACTS:
+      return {
+        ...state,
+        filtered: state.contacts.filter((contact) => {
+          const regex = new RegExp(`${action.payload}`, `gi`);
+          return contact.name(regex) || contact.email.match(regex);
+        }),
+      };
+    case CLEAR_FILTER:
+        return {
+            ...state,
+            filtered:null
+        }
 
     default:
       return state;
