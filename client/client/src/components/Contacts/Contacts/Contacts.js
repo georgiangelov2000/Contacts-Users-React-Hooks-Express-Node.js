@@ -4,6 +4,7 @@ import ContactContext from "../../../context/contacts/contactContext";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactFilter/ContactFilter";
 import ContactForm from "../ContactForm/ContactForm";
+import style from "./Contacts.module.css";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
@@ -18,7 +19,7 @@ const Contacts = () => {
   }
 
   return (
-    <Container fluid>
+    <Container fluid className={style.main}>
       <h5 className="text-center">My contacts</h5>
       <ContactFilter />
 
@@ -27,7 +28,7 @@ const Contacts = () => {
           <ContactForm />
         </Col>
 
-        <Col xs={12} className="justify-content-center">
+        <Col xs={12} className="justify-content-center ">
           {contacts !== null ? (
             <Row className="m-auto">
               {filtered !== null
@@ -46,15 +47,3 @@ const Contacts = () => {
 };
 
 export default Contacts;
-
-/*
-{contacts == null ? (
-        <h5 className="text-center">Please add a contact </h5>
-      ) : (
-        <Row className="m-0">
-          {contacts.map((contact) => (
-            <ContactItem key={contact._id} contact={contact} />
-          ))}
-        </Row>
-      )}
-      */

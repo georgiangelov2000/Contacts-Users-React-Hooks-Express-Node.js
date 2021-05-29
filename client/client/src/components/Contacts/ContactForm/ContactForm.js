@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import ContactContext from "../../../context/contacts/contactContext";
 import { useHistory } from "react-router-dom";
 
@@ -7,7 +7,8 @@ const ContactForm = () => {
   let history = useHistory();
 
   const contactContext = useContext(ContactContext);
-  const { addContact,  updateContact ,  clearCurrentContact, current } = contactContext;
+  const { addContact, updateContact, clearCurrentContact, current } =
+    contactContext;
 
   const [contact, setContact] = useState({
     username: "",
@@ -32,7 +33,7 @@ const ContactForm = () => {
         type: "personal",
       });
     }
-  }, [contactContext,current]);
+  }, [contactContext, current]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -49,10 +50,12 @@ const ContactForm = () => {
     clearCurrentContact();
   };
 
+
+
   return (
     <Container>
       <h5 className="text-center">
-        {current ? "Edit Contact" : "Contact Form"}
+        {current ? `Edit Contact: ${contact.username}` : "Contact Form"}
       </h5>
       <Form className="text-center" onSubmit={onSubmit}>
         <Form.Group controlId="formBasicEmail">
@@ -94,26 +97,44 @@ const ContactForm = () => {
         </Form.Group>
 
         <Form.Group className="mb-1" controlId="exampleForm.ControlSelect1">
-          <Form.Label className="text-white">Type</Form.Label>
+          <Form.Label>Type</Form.Label>
           <Form.Control
             size="sm"
             onChange={onChange}
             as="select"
             value={type}
             name="type"
+            className="mb-2"
           >
             <option value="professional">Professional</option>
             <option value="personal">Personal</option>
             <option value="public">Public</option>
           </Form.Control>
+          <Row>
+            <Col>
+              <Button
+                variant="primary"
+                type="submit"
+                className="ml-4"
+                value={current ? "Update Contact" : "Add Contact"}
+              >
+                Submit
+              </Button>
+            </Col>
+            {current ? (
+              <Col>
+                <Button
+                  variant="danger"
+                  type="submit"
+                  value="clear"
+                  onClick={clearAll}
+                >
+                  Clear
+                </Button>
+              </Col>
+            ) : null}
+          </Row>
         </Form.Group>
-        <Button
-          variant="primary"
-          type="submit"
-          value={current ? "Update Contact" : "Add Contact"}
-        >
-          Submit
-        </Button>
       </Form>
     </Container>
   );

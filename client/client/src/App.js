@@ -3,6 +3,7 @@ import Home from "./components/Home/Home";
 import Header from "./components/Header/Header";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
+import Footer from "./components/Footer/Footer";
 import AuthState from "./context/auth/authState";
 import ContactForm from "./components/Contacts/ContactForm/ContactForm";
 import ContactState from "./context/contacts/contactState";
@@ -12,6 +13,7 @@ import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
+    <div className="App">
     <AuthState>
       <ContactState>
         <AlertState>
@@ -23,9 +25,11 @@ function App() {
             <Route path="/contact-form" component={ContactForm} />
             <Route path="/contacts" component={Contacts} />
           </Switch>
+          <Footer />
         </AlertState>
       </ContactState>
     </AuthState>
+    </div>
   );
 }
 
