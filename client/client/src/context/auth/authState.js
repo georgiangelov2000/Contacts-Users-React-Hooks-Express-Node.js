@@ -11,7 +11,8 @@ import
    LOGIN_FAIL,
    USER_LOADED,
    AUTH_ERROR,
-   LOGOUT
+   LOGOUT,
+   CLEAR_ERRORS
   } from "./types";
 
 const AuthState = (props) => {
@@ -19,6 +20,7 @@ const AuthState = (props) => {
     token: localStorage.getItem("token"),
     isAuthenticated: null,
     user: null,
+    error:null,
   };
 
   const [state, dispatch] = useReducer(authReducer, initalState);
@@ -85,6 +87,8 @@ const AuthState = (props) => {
 
   const logout =()=>dispatch({type:LOGOUT})
 
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
+
 
   return (
     <AuthContext.Provider
@@ -92,10 +96,12 @@ const AuthState = (props) => {
         token: state.token,
         isAuthenticated: state.isAuthenticated,
         user: state.user,
+        error: state.error,
         register,
         login,
         loadUser,
         logout,
+        clearErrors
       }}
     >
       {props.children}

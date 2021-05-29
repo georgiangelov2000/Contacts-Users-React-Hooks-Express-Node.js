@@ -89,11 +89,32 @@ const ContactState = (props) => {
     }
   }
 
-  const filterContacts =text=>{
+
+  const updateContact=async contact=>{
+    
+    const config={
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res=await axios.put(`http://localhost:8000/api/contacts/${contact._id}`,contact,config);
       dispatch({
-          type:FILTER_CONTACTS,
-          payload:text
+        UPDATE_CONTACT,
+        payload:res.data
       })
+    } catch (error) {
+      dispatch({
+        type: CONTACT_ERROR,
+        payload: error.response.msg
+      });
+    }
+
+  }
+
+  const filterContacts = text =>{
+      dispatch({type:FILTER_CONTACTS, payload:text})
   }
 
   const clearFilter=()=>{
@@ -101,7 +122,6 @@ const ContactState = (props) => {
           type:CLEAR_FILTER
       })
   }
-
 
   return (
     <ContactContext.Provider
@@ -115,7 +135,8 @@ const ContactState = (props) => {
         getContacts,
         deleteContact,
         filterContacts,
-        clearFilter
+        clearFilter,
+        updateContact,
       }}
     >
       {props.children}

@@ -1,17 +1,24 @@
 import React,{useEffect,useState,useContext} from "react";
 import {useHistory} from "react-router-dom";
-import {Form,Button,Container} from "react-bootstrap";
+import {Form,Button,Container,Col} from "react-bootstrap";
 import AuthContext from "../../context/auth/authContext";
+import AlertContext from "../../context/alerts/alertContext";
 
 const Register = () => {
   const history =useHistory();
-  const authContext =useContext(AuthContext);
 
-  const {register,isAuthenticated}=authContext;
+  const authContext =useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
+
+  const { setAlert } = alertContext;
+  const {register,isAuthenticated,error}=authContext;
 
   useEffect(()=>{
     if(isAuthenticated){
-      console.log("is authenticated is true!")
+      history.push('/contacts')
+    }
+    if (error === 'User already exists') {
+      setAlert(error, 'danger');
     }
   },[isAuthenticated])
 
@@ -29,9 +36,9 @@ const Register = () => {
   const onSubmit = e =>{
     e.preventDefault();
     if (name === '' || email === '' || password === '') {
-      console.log('Please enter all fields', 'danger');
+      setAlert('Please enter all fields', 'danger');
     } else if (password !== password2) {
-      console.log('Passwords do not match', 'danger');
+      setAlert('Passwords do not match', 'danger');
     } else {
       register({
         name,
@@ -42,7 +49,8 @@ const Register = () => {
   }
 
   return (
-    <Container>
+    <Container className="text-center mt-5">
+      <Col xs={6} className="m-auto">
     <h5 className="text-center" >Register</h5>
       <Form onSubmit={onSubmit}>
         <Form.Group controlId="formBasicName">
@@ -99,6 +107,7 @@ const Register = () => {
           Submit
         </Button>
       </Form>
+      </Col>
     </Container>
   );
 };

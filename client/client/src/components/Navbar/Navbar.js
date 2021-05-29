@@ -2,8 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { Nav, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import AuthContext from "../../context/auth/authContext";
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
+  let history = useHistory();
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user, loadUser, logout } = authContext;
 
@@ -13,6 +15,7 @@ const Navbar = () => {
 
   const onLogout = () => {
     logout();
+    history.push("/login");
   };
 
   const authRoute = (
@@ -20,6 +23,11 @@ const Navbar = () => {
       <Nav className="bg-dark mb-1">
         <Nav.Item>
           <LinkContainer to="/">
+            <Nav.Link className="text-white">Home</Nav.Link>
+          </LinkContainer>
+        </Nav.Item>
+        <Nav.Item>
+          <LinkContainer to="/contacts">
             <Nav.Link className="text-white">
               Hello {user && user.name}
             </Nav.Link>
@@ -48,11 +56,15 @@ const Navbar = () => {
     <>
       <Nav className="bg-dark mb-1">
         <Nav.Item>
+          <LinkContainer to="/">
+            <Nav.Link className="text-white">Home</Nav.Link>
+          </LinkContainer>
+        </Nav.Item>
+        <Nav.Item>
           <LinkContainer to="/register">
             <Nav.Link className="text-white">Register</Nav.Link>
           </LinkContainer>
         </Nav.Item>
-
         <Nav.Item>
           <LinkContainer to="/login">
             <Nav.Link className="text-white">Login</Nav.Link>

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { Row,Container } from "react-bootstrap";
+import { Row, Container } from "react-bootstrap";
 import ContactContext from "../../../context/contacts/contactContext";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactFilter/ContactFilter";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);
-  const { contacts, getContacts } = contactContext;
+  const { contacts, getContacts, filtered } = contactContext;
 
   useEffect(() => {
     getContacts();
@@ -20,7 +20,26 @@ const Contacts = () => {
     <Container>
       <h5 className="text-center">My contacts</h5>
       <ContactFilter />
-      {contacts == null ? (
+
+      {contacts !== null ? (
+        <Row>
+          {filtered !== null
+            ? filtered.map((contact) => (
+                <ContactItem key={contact._id} contact={contact} />
+              ))
+            : contacts.map((contact) => (
+                <ContactItem key={contact._id} contact={contact} />
+              ))}
+        </Row>
+      ) : null}
+    </Container>
+  );
+};
+
+export default Contacts;
+
+/*
+{contacts == null ? (
         <h5 className="text-center">Please add a contact </h5>
       ) : (
         <Row className="m-0">
@@ -29,8 +48,4 @@ const Contacts = () => {
           ))}
         </Row>
       )}
-    </Container>
-  );
-};
-
-export default Contacts;
+      */

@@ -49,7 +49,7 @@ const ContactForm = () => {
   return (
     <Container>
       <h5 className="text-center">Contact Form</h5>
-      <Form onSubmit={onSubmit}>
+      <Form className="text-center" onSubmit={onSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Name</Form.Label>
           <Form.Control
