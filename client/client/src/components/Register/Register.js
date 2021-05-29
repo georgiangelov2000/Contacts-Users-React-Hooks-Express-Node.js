@@ -1,112 +1,117 @@
-import React,{useEffect,useState,useContext} from "react";
-import {useHistory} from "react-router-dom";
-import {Form,Button,Container,Col} from "react-bootstrap";
+import React, { useEffect, useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { Form, Button, Container, Col } from "react-bootstrap";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alerts/alertContext";
 
 const Register = () => {
-  const history =useHistory();
+  const history = useHistory();
 
-  const authContext =useContext(AuthContext);
+  const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
   const { setAlert } = alertContext;
-  const {register,isAuthenticated,error}=authContext;
+  const { register, isAuthenticated, error, clearErrors } = authContext;
 
-  useEffect(()=>{
-    if(isAuthenticated){
-      history.push('/contacts')
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/contacts");
     }
-    if (error === 'User already exists') {
-      setAlert(error, 'danger');
+    if (error === "User already exists") {
+      setAlert(error, "danger");
+      clearErrors();
     }
-  },[isAuthenticated])
+  }, [isAuthenticated]);
 
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: ''
+    name: "",
+    email: "",
+    password: "",
+    password2: "",
   });
 
-  const {name, email, password,password2} =user;
+  const { name, email, password, password2 } = user;
 
-  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
-  const onSubmit = e =>{
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (name === '' || email === '' || password === '') {
-      setAlert('Please enter all fields', 'danger');
+    if (name === "" || email === "" || password === "") {
+      setAlert("Please enter all fields", "danger");
     } else if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
+      setAlert("Passwords do not match", "danger");
     } else {
       register({
         name,
         email,
-        password
-      })
+        password,
+      });
     }
-  }
+  };
 
   return (
     <Container className="text-center mt-5">
       <Col xs={6} className="m-auto">
-    <h5 className="text-center" >Register</h5>
-      <Form onSubmit={onSubmit}>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Enter name"
-            name="name"
-            onChange={onChange}
-            value={name}
-          />
-        </Form.Group>
+        <h5 className="text-center">Register</h5>
+        <Form onSubmit={onSubmit}>
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              size="sm"
+              required
+              type="text"
+              placeholder="Enter name"
+              name="name"
+              onChange={onChange}
+              value={name}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            required
-            name="email"
-            type="email"
-            placeholder="Enter email"
-            onChange={onChange}
-            value={email}
-          />
-        </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              size="sm"
+              required
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              onChange={onChange}
+              value={email}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            minLength="6"
-            onChange={onChange}
-            value={password}
-          />
-        </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              size="sm"
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              minLength="6"
+              onChange={onChange}
+              value={password}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password2"
-            placeholder="Password"
-            required
-            minLength="6"
-            onChange={onChange}
-            value={password2}
-          />
-        </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+              size="sm"
+              type="password"
+              name="password2"
+              placeholder="Password"
+              required
+              minLength="6"
+              onChange={onChange}
+              value={password2}
+            />
+          </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
       </Col>
     </Container>
   );

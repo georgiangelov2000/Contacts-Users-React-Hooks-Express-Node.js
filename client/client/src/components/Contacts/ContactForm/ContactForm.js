@@ -1,21 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import ContactContext from "../../../context/contacts/contactContext";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ContactForm = () => {
-  let history=useHistory();
+  let history = useHistory();
+
   const contactContext = useContext(ContactContext);
-  const { addContact, current, clearCurrentContact } = contactContext;
+  const { addContact,  updateContact ,  clearCurrentContact, current } = contactContext;
 
   const [contact, setContact] = useState({
-    name: "",
+    username: "",
     email: "",
     phone: "",
     type: "personal",
   });
 
-  const { name, email, phone, type } = contact;
+  const { username, email, phone, type } = contact;
 
   const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -25,19 +26,21 @@ const ContactForm = () => {
       setContact(current);
     } else {
       setContact({
-        name: "",
+        username: "",
         email: "",
         phone: "",
         type: "personal",
       });
     }
-  },[contactContext,current]);
+  }, [contactContext,current]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
-      history.push('/contacts')
+      history.push("/contacts");
+    } else {
+      updateContact(contact);
     }
     clearAll();
   };
@@ -48,22 +51,26 @@ const ContactForm = () => {
 
   return (
     <Container>
-      <h5 className="text-center">Contact Form</h5>
+      <h5 className="text-center">
+        {current ? "Edit Contact" : "Contact Form"}
+      </h5>
       <Form className="text-center" onSubmit={onSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
+            size="sm"
             onChange={onChange}
-            name="name"
+            name="username"
             type="text"
-            placeholder="Enter name"
-            value={name}
+            placeholder="Enter Username"
+            value={username}
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
+            size="sm"
             type="email"
             name="email"
             placeholder="Enter Email"
@@ -76,6 +83,7 @@ const ContactForm = () => {
         <Form.Group controlId="formBasicPhone">
           <Form.Label>Phone</Form.Label>
           <Form.Control
+            size="sm"
             type="text"
             name="phone"
             placeholder="Enter Phone"
@@ -88,6 +96,7 @@ const ContactForm = () => {
         <Form.Group className="mb-1" controlId="exampleForm.ControlSelect1">
           <Form.Label className="text-white">Type</Form.Label>
           <Form.Control
+            size="sm"
             onChange={onChange}
             as="select"
             value={type}
@@ -98,7 +107,11 @@ const ContactForm = () => {
             <option value="public">Public</option>
           </Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          value={current ? "Update Contact" : "Add Contact"}
+        >
           Submit
         </Button>
       </Form>

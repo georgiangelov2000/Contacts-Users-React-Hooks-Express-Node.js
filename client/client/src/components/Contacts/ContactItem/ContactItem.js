@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
-import AuthContext from "../../../context/auth/authContext";
-
 import {
   ListGroup,
   ListGroupItem,
   CloseButton,
   Col,
   Row,
+  Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import ContactContext from "../../../context/contacts/contactContext";
 
 const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
 
-  const { deleteContact, clearCurrentContact} =contactContext;
-  const { _id, name, email, phone, type } = contact;
+  const { deleteContact, clearCurrentContact,setCurrentContact } = contactContext;
+  const { _id, username, email, phone, type } = contact;
 
   const onDelete = () => {
     deleteContact(_id);
@@ -29,12 +27,15 @@ const ContactItem = ({ contact }) => {
           <ListGroup>
             <CloseButton onClick={onDelete} />
             <>
-              <ListGroupItem>Name: {name}</ListGroupItem>
+              <ListGroupItem>Name: {username}</ListGroupItem>
               <ListGroupItem>Email: {email}</ListGroupItem>
               <ListGroupItem>Phone: {phone}</ListGroupItem>
               <ListGroupItem>Type: {type}</ListGroupItem>
               <ListGroupItem>
-                Action: <Link to={`/${contact._id}`} >Edit</Link>
+                Action:{" "}
+                <Button onClick={() => setCurrentContact(contact)} variant="success" size="sm">
+                  Edit
+                </Button>
               </ListGroupItem>
             </>
           </ListGroup>

@@ -7,7 +7,6 @@ import AuthState from "./context/auth/authState";
 import ContactForm from "./components/Contacts/ContactForm/ContactForm";
 import ContactState from "./context/contacts/contactState";
 import Contacts from "./components/Contacts/Contacts/Contacts";
-import UpdateContact from "./components/Contacts/UpdateContact/UpdateContact";
 import AlertState from "./context/alerts/alertState";
 import { Switch, Route } from "react-router-dom";
 
@@ -23,7 +22,6 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/contact-form" component={ContactForm} />
             <Route path="/contacts" component={Contacts} />
-            <Route path="/:_id" component={UpdateContact} />
           </Switch>
         </AlertState>
       </ContactState>

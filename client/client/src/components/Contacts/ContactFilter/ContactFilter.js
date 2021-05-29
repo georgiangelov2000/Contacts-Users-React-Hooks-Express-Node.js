@@ -1,32 +1,33 @@
-import React, {useRef, useContext, useEffect, } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import ContactContext from "../../../context/contacts/contactContext";
-import {Form} from "react-bootstrap";
+import { Form, Col } from "react-bootstrap";
 
 const ContactFilter = () => {
   const contactContext = useContext(ContactContext);
-  const text=useRef("");
+  const text = useRef("");
 
-  const { filterContacts, filtered,clearFilter  } = contactContext;
-  
+  const { filterContacts, filtered, clearFilter } = contactContext;
+
   useEffect(() => {
-      if(filtered === null) {
-        text.current.value="";
-      }
+    if (filtered === null) {
+      text.current.value = "";
+    }
   });
 
   const onChange = (e) => {
-   if(text.current.value !==""){
-       filterContacts(e.target.value)
-   }else{
-       clearFilter()
-   }
+    if (text.current.value !== "") {
+      filterContacts(e.target.value);
+    } else {
+      clearFilter();
+    }
   };
 
   return (
-    <div>
+    <Col xs={9} className="m-auto">
       <Form>
         <Form.Group className="mb-3" controlId="formBasicText">
           <Form.Control
+            size="sm"
             ref={text}
             type="text"
             placeholder="Enter Contacts..."
@@ -34,7 +35,7 @@ const ContactFilter = () => {
           />
         </Form.Group>
       </Form>
-    </div>
+    </Col>
   );
 };
 
