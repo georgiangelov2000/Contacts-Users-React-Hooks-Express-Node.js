@@ -4,8 +4,8 @@ import ContactContext from "../../../context/contacts/contactContext";
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactFilter/ContactFilter";
 import ContactForm from "../ContactForm/ContactForm";
+import Spinner from "../../Spinner/Spinner";
 import style from "./Contacts.module.css";
-
 import AuthContext from "../../../context/auth/authContext";
 
 const Contacts = () => {
@@ -16,11 +16,11 @@ const Contacts = () => {
   const { contacts, filtered, getContacts, loading } = contactContext;
 
   useEffect(() => {
-    loadUser();
+    getContacts();
   }, []);
 
   useEffect(() => {
-    getContacts();
+    loadUser();
   }, []);
 
   if (contacts !== null && contacts.length === 0 && !loading) {
@@ -29,17 +29,17 @@ const Contacts = () => {
 
   return (
     <Container fluid className={style.main}>
-      <h5 className="text-center">My contacts</h5>
-      <ContactFilter />
+      <ContactForm />
 
       <Row>
-        <Col xs={12} className="m-auto">
-          <ContactForm />
+        <Col xs={12} className="mt-5 text-center">
+          <h6>Filter by name and email</h6>
+          <ContactFilter />
         </Col>
 
-        <Col xs={12} className="justify-content-center ">
-          {contacts !== null ? (
-            <Row className="m-auto">
+        <Col xs={12}>
+          {contacts !== null && !loading ? (
+            <Row className="justify-content-center">
               {filtered !== null
                 ? filtered.map((contact) => (
                     <ContactItem key={contact._id} contact={contact} />
@@ -48,7 +48,9 @@ const Contacts = () => {
                     <ContactItem key={contact._id} contact={contact} />
                   ))}
             </Row>
-          ) : null}
+          ) : (
+            <Spinner />
+          )}
         </Col>
       </Row>
     </Container>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Container, Col } from "react-bootstrap";
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alerts/alertContext";
 
@@ -21,7 +22,7 @@ const Register = () => {
       setAlert(error, "danger");
       clearErrors();
     }
-  }, [error,isAuthenticated,history]);
+  }, [error, isAuthenticated, history]);
 
   const [user, setUser] = useState({
     name: "",
@@ -113,6 +114,13 @@ const Register = () => {
           </Button>
         </Form>
       </Col>
+      <Row>
+        <Col xs={12}>
+          <>
+            Already have account? Go to <Link to="/login">Login</Link>
+          </>
+        </Col>
+      </Row>
     </Container>
   );
 };

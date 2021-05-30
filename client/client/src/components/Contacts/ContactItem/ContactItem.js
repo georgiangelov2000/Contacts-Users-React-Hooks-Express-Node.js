@@ -32,7 +32,7 @@ const ContactItem = ({ contact }) => {
               <ListGroupItem>Phone: {phone}</ListGroupItem>
               <ListGroupItem>Type: {type}</ListGroupItem>
               <ListGroupItem>
-                Action:{" "}
+                Action:
                 <Button onClick={() => setCurrentContact(contact)} variant="success" size="sm">
                   Edit
                 </Button>

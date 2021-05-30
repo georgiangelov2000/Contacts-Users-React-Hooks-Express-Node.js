@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Col } from "react-bootstrap";
 const Home = () => {
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 text-center">
       <Col>
         <h2>What is Lorem Ipsum?</h2>
         Lorem Ipsum is simply dummy text of the printing and typesetting

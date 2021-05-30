@@ -12,7 +12,6 @@ import {
   CONTACT_ERROR,
   CLEAR_CURRENT,
   CLEAR_FILTER,
-  GET_CONTACT,
   SET_CURRENT
 } from "./types";
 
@@ -34,22 +33,6 @@ const ContactState = (props) => {
       dispatch({
         type: GET_CONTACTS,
         payload: res.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: CONTACT_ERROR,
-        payload: error.response.msg,
-      });
-    }
-  };
-
-  const getContact = async (id) => {
-    try {
-      await axios.get(`http://localhost:8000/api/contacts/${id}`);
-
-      dispatch({
-        type: GET_CONTACT,
-        payload: id,
       });
     } catch (error) {
       dispatch({
@@ -84,12 +67,6 @@ const ContactState = (props) => {
     }
   };
 
-  const clearCurrentContact = () => {
-    dispatch({
-      type: CLEAR_CURRENT,
-    });
-  };
-
   const deleteContact = async (id) => {
     try {
       await axios.delete(`http://localhost:8000/api/contacts/${id}`);
@@ -120,7 +97,7 @@ const ContactState = (props) => {
         config
       );
       dispatch({
-        UPDATE_CONTACT,
+        type: UPDATE_CONTACT,
         payload: res.data,
       });
     } catch (error) {
@@ -129,6 +106,12 @@ const ContactState = (props) => {
         payload: error.response.msg,
       });
     }
+  };
+
+  const clearCurrentContact = () => {
+    dispatch({
+      type: CLEAR_CURRENT,
+    });
   };
 
   const setCurrentContact = (contact) => {
@@ -159,7 +142,6 @@ const ContactState = (props) => {
         filterContacts,
         clearFilter,
         updateContact,
-        getContact,
         setCurrentContact
       }}
     >

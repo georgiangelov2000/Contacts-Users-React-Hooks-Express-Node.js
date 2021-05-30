@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Container, Col } from "react-bootstrap";
+import { Form, Button, Container, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alerts/alertContext";
 
@@ -20,7 +21,7 @@ const Login = () => {
       setAlert(error, "danger");
       clearErrors();
     }
-  }, [error,isAuthenticated,history]);
+  }, [error, isAuthenticated, history]);
 
   const [user, setUser] = useState({
     email: "",
@@ -55,20 +56,19 @@ const Login = () => {
               required
               name="email"
               type="email"
-              placeholder="Enter email"
+              placeholder="Account: georgi@abv.bg"
               onChange={onChange}
               value={email}
               required
             />
           </Form.Group>
-
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
+              placeholder="Password: georgi123"
               size="sm"
               type="password"
               name="password"
-              placeholder="Password"
               required
               value={password}
               onChange={onChange}
@@ -81,6 +81,14 @@ const Login = () => {
           </Button>
         </Form>
       </Col>
+
+      <Row>
+        <Col xs={12}>
+          <>
+            Don't have account Please go to <Link to="/register">Register</Link>
+          </>
+        </Col>
+      </Row>
     </Container>
   );
 };

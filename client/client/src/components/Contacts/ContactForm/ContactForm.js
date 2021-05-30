@@ -7,19 +7,8 @@ const ContactForm = () => {
   let history = useHistory();
 
   const contactContext = useContext(ContactContext);
-  const { addContact, updateContact, clearCurrentContact, current } =contactContext;
-
-  const [contact, setContact] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    type: "personal",
-  });
-
-  const { username, email, phone, type } = contact;
-
-  const onChange = (e) =>
-    setContact({ ...contact, [e.target.name]: e.target.value });
+  const { addContact, updateContact, clearCurrentContact, current } =
+    contactContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -34,11 +23,23 @@ const ContactForm = () => {
     }
   }, [contactContext, current]);
 
+  const [contact, setContact] = useState({
+    username: "",
+    email: "",
+    phone: "",
+    type: "personal",
+  });
+
+  const { username, email, phone, type } = contact;
+
+  const onChange = (e) =>
+    setContact({ ...contact, [e.target.name]: e.target.value });
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (current === null) {
       addContact(contact);
-      history.push("/contacts");
+      history.push("/dashboard");
     } else {
       updateContact(contact);
     }
@@ -48,8 +49,6 @@ const ContactForm = () => {
   const clearAll = () => {
     clearCurrentContact();
   };
-
-
 
   return (
     <Container>
@@ -66,6 +65,7 @@ const ContactForm = () => {
             type="text"
             placeholder="Enter Username"
             value={username}
+            required
           />
         </Form.Group>
 
@@ -79,6 +79,7 @@ const ContactForm = () => {
             onChange={onChange}
             minLength="6"
             value={email}
+            required
           />
         </Form.Group>
 
@@ -92,6 +93,7 @@ const ContactForm = () => {
             onChange={onChange}
             minLength="6"
             value={phone}
+            required
           />
         </Form.Group>
 
@@ -104,6 +106,7 @@ const ContactForm = () => {
             value={type}
             name="type"
             className="mb-2"
+            required
           >
             <option value="professional">Professional</option>
             <option value="personal">Personal</option>
@@ -117,7 +120,7 @@ const ContactForm = () => {
                 className="ml-4"
                 value={current ? "Update Contact" : "Add Contact"}
               >
-                Submit
+                {current ? "Update Contact" : "Add Contact"}
               </Button>
             </Col>
             {current ? (
