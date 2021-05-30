@@ -20,7 +20,7 @@ const Navbar = () => {
 
   const authRoute = (
     <>
-      <Nav className="bg-dark mb-1">
+      <Nav className="bg-dark">
         <Nav.Item>
           <LinkContainer to="/">
             <Nav.Link className="text-white">Home</Nav.Link>
@@ -54,7 +54,7 @@ const Navbar = () => {
 
   const guestRoute = (
     <>
-      <Nav className="bg-dark mb-1">
+      <Nav className="bg-dark">
         <Nav.Item>
           <LinkContainer to="/">
             <Nav.Link className="text-white">Home</Nav.Link>

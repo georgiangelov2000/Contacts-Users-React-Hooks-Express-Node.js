@@ -16,15 +16,15 @@ const Contacts = () => {
   const { contacts, filtered, getContacts, loading } = contactContext;
 
   useEffect(() => {
-    getContacts();
-  }, []);
-
-  useEffect(() => {
     loadUser();
   }, []);
 
+  useEffect(() => {
+    getContacts();
+  }, []);
+
   if (contacts !== null && contacts.length === 0 && !loading) {
-    return <h4 className="text-center">Please add a contact</h4>;
+    return <h4 className="text-center mt-5">Please add a contact</h4>;
   }
 
   return (

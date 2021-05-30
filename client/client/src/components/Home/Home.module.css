@@ -1,0 +1,25 @@
+.background {
+  background-image: url("../../assets/background.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 716px;
+}
+
+.row {
+  padding: 267px;
+  display: flex;
+  text-align: center;
+}
+
+.link {
+  background-color: black;
+  opacity: 0.6;
+  padding: 20px 50px 20px 50px;
+  color: white;
+  border-radius: 10px;
+}
+
+.link:hover {
+  color: white;
+}

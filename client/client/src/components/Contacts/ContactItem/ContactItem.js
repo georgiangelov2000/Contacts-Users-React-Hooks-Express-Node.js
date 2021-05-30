@@ -15,7 +15,7 @@ const ContactItem = ({ contact }) => {
 
   const { deleteContact, clearCurrentContact, setCurrentContact } =
     contactContext;
-  const { _id, username, email, phone, type,img } = contact;
+  const { _id, username, email, phone, type, img } = contact;
 
   const onDelete = () => {
     deleteContact(_id);
@@ -30,24 +30,20 @@ const ContactItem = ({ contact }) => {
             <CloseButton onClick={onDelete} />
             <>
               <ListGroupItem className="text-center">
-                <Avatar
-                  size="150"
-                  round={true}
-                  src={img}
-                />
+                <Avatar size="150" round={true} src={img} />
               </ListGroupItem>
-              <ListGroupItem>Name: {username}</ListGroupItem>
-              <ListGroupItem>Email: {email}</ListGroupItem>
-              <ListGroupItem>Phone: {phone}</ListGroupItem>
-              <ListGroupItem>Type: {type}</ListGroupItem>
+              <ListGroupItem><span>Name: </span> {username}</ListGroupItem>
+              <ListGroupItem><span>Email: </span> {email}</ListGroupItem>
+              <ListGroupItem><span>Phone: </span>{phone}</ListGroupItem>
+              <ListGroupItem><span>Type: </span>{type}</ListGroupItem>
               <ListGroupItem>
                 Action:
                 <Button
-                  onClick={() => setCurrentContact(contact)}
                   variant="success"
                   size="sm"
+                  onClick={() => setCurrentContact(contact)}
                 >
-                  Edit
+                  Update
                 </Button>
               </ListGroupItem>
             </>
