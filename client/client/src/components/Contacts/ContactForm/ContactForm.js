@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import ContactContext from "../../../context/contacts/contactContext";
 import { useHistory } from "react-router-dom";
+import Alerts from "../../Alerts/Alerts";
 
 const ContactForm = () => {
   let history = useHistory();
@@ -58,6 +59,7 @@ const ContactForm = () => {
         {current ? `Edit Contact: ${contact.username}` : "Contact Form"}
       </h5>
       <Form className="text-center" onSubmit={onSubmit}>
+        <Alerts />
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Username</Form.Label>
           <Form.Control

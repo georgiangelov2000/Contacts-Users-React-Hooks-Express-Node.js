@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import Alerts from "../Alerts/Alerts";
+import { useHistory, Link } from "react-router-dom";
 import { Form, Button, Container, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alerts/alertContext";
 
@@ -54,6 +54,7 @@ const Register = () => {
     <Container className="text-center mt-5">
       <Col xs={6} className="m-auto">
         <h5 className="text-center">Register</h5>
+        <Alerts />
         <Form onSubmit={onSubmit}>
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>

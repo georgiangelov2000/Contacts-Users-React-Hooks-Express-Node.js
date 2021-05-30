@@ -4,6 +4,7 @@ import { Form, Button, Container, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alerts/alertContext";
+import Alerts from "../Alerts/Alerts";
 
 const Login = () => {
   let history = useHistory();
@@ -49,6 +50,7 @@ const Login = () => {
       <Col xs={6} className="m-auto">
         <h5 className="text-center">Login</h5>
         <Form onSubmit={onSubmit}>
+          <Alerts />
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control

@@ -1,12 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import { Row, Container, Col } from "react-bootstrap";
+
 import ContactContext from "../../../context/contacts/contactContext";
+import AuthContext from "../../../context/auth/authContext";
+
 import ContactItem from "../ContactItem/ContactItem";
 import ContactFilter from "../ContactFilter/ContactFilter";
 import ContactForm from "../ContactForm/ContactForm";
+
 import Spinner from "../../Spinner/Spinner";
 import style from "./Contacts.module.css";
-import AuthContext from "../../../context/auth/authContext";
+
+import Alerts from "../../Alerts/Alerts";
 
 const Contacts = () => {
   const authContext = useContext(AuthContext);

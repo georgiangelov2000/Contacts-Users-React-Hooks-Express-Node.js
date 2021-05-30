@@ -22,11 +22,11 @@ router.post(
   [
     auth,
     [
-      check("username", "Username is required!").not().isEmpty(),
+      check("username", "Username is required!").not().isEmpty().isLength({ min: 4 }),
       check("email", "Email error!").isEmail(),
-      check("phone", "Phone is required!").not().isEmpty(),
+      check("phone", "Phone is required!").not().isEmpty().isLength({ min: 10 }),
       check("type", "Type is required!").not().isEmpty(),
-      check("img", "Img is required!").not().isEmpty(),
+      check("img", "Img is required!").not().isEmpty()
     ],
   ],
   async (req, res) => {
