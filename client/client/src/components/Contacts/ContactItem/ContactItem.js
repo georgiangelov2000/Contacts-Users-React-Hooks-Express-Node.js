@@ -15,7 +15,7 @@ const ContactItem = ({ contact }) => {
 
   const { deleteContact, clearCurrentContact, setCurrentContact } =
     contactContext;
-  const { _id, username, email, phone, type, img } = contact;
+  const { _id, username, email, phone, type, img, user } = contact;
 
   const onDelete = () => {
     deleteContact(_id);
@@ -36,6 +36,7 @@ const ContactItem = ({ contact }) => {
               <ListGroupItem><span>Email: </span> {email}</ListGroupItem>
               <ListGroupItem><span>Phone: </span>{phone}</ListGroupItem>
               <ListGroupItem><span>Type: </span>{type}</ListGroupItem>
+              <ListGroupItem><span>Author: </span>{user.name}</ListGroupItem>
               <ListGroupItem>
                 Action:
                 <Button

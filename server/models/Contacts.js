@@ -16,11 +16,11 @@ const ContactSchema = mongoose.Schema({
   type: {
     type: String,
     default: "personal",
-    required:true,
+    required: true,
   },
   img: {
     type: String,
-    required:true,
+    required: true,
   },
   date: {
     type: Date,
