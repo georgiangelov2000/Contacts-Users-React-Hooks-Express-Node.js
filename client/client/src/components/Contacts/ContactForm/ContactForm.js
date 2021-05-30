@@ -18,6 +18,7 @@ const ContactForm = () => {
         username: "",
         email: "",
         phone: "",
+        img:"",
         type: "personal",
       });
     }
@@ -27,10 +28,11 @@ const ContactForm = () => {
     username: "",
     email: "",
     phone: "",
+    img: "",
     type: "personal",
   });
 
-  const { username, email, phone, type } = contact;
+  const { username, email, phone, type,img } = contact;
 
   const onChange = (e) =>
     setContact({ ...contact, [e.target.name]: e.target.value });
@@ -93,6 +95,20 @@ const ContactForm = () => {
             onChange={onChange}
             minLength="6"
             value={phone}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicImage">
+          <Form.Label>Image Url</Form.Label>
+          <Form.Control
+            size="sm"
+            type="text"
+            name="img"
+            placeholder="Enter Image Url"
+            onChange={onChange}
+            minLength="6"
+            value={img}
             required
           />
         </Form.Group>
