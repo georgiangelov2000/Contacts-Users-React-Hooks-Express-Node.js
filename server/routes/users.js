@@ -8,7 +8,7 @@ const { check, validationResult } = require("express-validator");
 const User = require("../models/User");
 
 router.post(
-    "/create-user",
+    "/",
     [
       check("name", "Please add name").not().isEmpty(),
       check("email", "Please include a valid email").isEmail(),
@@ -47,7 +47,6 @@ router.post(
         const payload = {
           user: {
             id: user.id,
-            user:user.name,
           },
         };
   
@@ -57,13 +56,13 @@ router.post(
           {
             expiresIn: 360000,
           },
-          (err, token) => {
-            if (err) throw err;
-            res.json({ token, payload });
+          (error, token) => {
+            if (error) throw error;
+            res.json({ token });
           }
         );
-      } catch (err) {
-        console.error(err.message);
+      } catch (error) {
+        console.error(error.message);
         res.status(500).send("Server Error");
       }
     }

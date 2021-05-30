@@ -14,13 +14,13 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/contacts");
+      history.push("/dashboard");
     }
     if (error === "Invalid Credentials") {
       setAlert(error, "danger");
       clearErrors();
     }
-  }, [isAuthenticated, error]);
+  }, [error,isAuthenticated,history]);
 
   const [user, setUser] = useState({
     email: "",

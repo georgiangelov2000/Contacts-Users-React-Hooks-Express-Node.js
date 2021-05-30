@@ -27,7 +27,7 @@ const Navbar = () => {
           </LinkContainer>
         </Nav.Item>
         <Nav.Item>
-          <LinkContainer to="/contacts">
+          <LinkContainer to="/dashboard">
             <Nav.Link className="text-white">
               Hello {user && user.name}
             </Nav.Link>
@@ -44,8 +44,8 @@ const Navbar = () => {
           </LinkContainer>
         </Nav.Item>
         <Nav.Item>
-          <LinkContainer to="/contacts">
-            <Nav.Link className="text-white">Contacts</Nav.Link>
+          <LinkContainer to="/dashboard">
+            <Nav.Link className="text-white">Dashboard</Nav.Link>
           </LinkContainer>
         </Nav.Item>
       </Nav>

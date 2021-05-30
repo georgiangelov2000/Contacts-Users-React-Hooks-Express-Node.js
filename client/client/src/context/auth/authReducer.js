@@ -6,7 +6,7 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
 } from "./types";
 
 export default (state, action) => {
@@ -15,8 +15,10 @@ export default (state, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload,
+        loading: false,
+        user: action.payload
       };
+      
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
@@ -24,6 +26,7 @@ export default (state, action) => {
         ...state,
         ...action.payload,
         isAuthenticated: true,
+        loading: false,
       };
 
     case REGISTER_FAIL:
@@ -35,6 +38,7 @@ export default (state, action) => {
         ...state,
         token: null,
         isAuthenticated: false,
+        loading: false,
         user: null,
         error: action.payload,
       };

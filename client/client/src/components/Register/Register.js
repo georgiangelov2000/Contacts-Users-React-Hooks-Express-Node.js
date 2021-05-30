@@ -15,13 +15,13 @@ const Register = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      history.push("/contacts");
+      history.push("/dashboard");
     }
     if (error === "User already exists") {
       setAlert(error, "danger");
       clearErrors();
     }
-  }, [isAuthenticated]);
+  }, [error,isAuthenticated,history]);
 
   const [user, setUser] = useState({
     name: "",

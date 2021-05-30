@@ -6,15 +6,24 @@ import ContactFilter from "../ContactFilter/ContactFilter";
 import ContactForm from "../ContactForm/ContactForm";
 import style from "./Contacts.module.css";
 
+import AuthContext from "../../../context/auth/authContext";
+
 const Contacts = () => {
+  const authContext = useContext(AuthContext);
+  const { loadUser } = authContext;
+
   const contactContext = useContext(ContactContext);
-  const { contacts, getContacts, filtered } = contactContext;
+  const { contacts, filtered, getContacts, loading } = contactContext;
+
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   useEffect(() => {
     getContacts();
   }, []);
 
-  if (contacts !== null && contacts.length === 0) {
+  if (contacts !== null && contacts.length === 0 && !loading) {
     return <h4 className="text-center">Please add a contact</h4>;
   }
 

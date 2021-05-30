@@ -8,7 +8,7 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
 
-router.get('/authorization',authMiddleware,async(req,res)=>{
+router.get('/',authMiddleware,async (req,res)=>{
     try {
         const user=await User.findById(req.user.id).select("-password");
         res.json(user);
@@ -19,7 +19,7 @@ router.get('/authorization',authMiddleware,async(req,res)=>{
 })
 
 router.post(
-  "/login",
+  '/',
   [
     check("email", "Please include a valid email").isEmail(),
     check("password", "Password is required").exists(),
@@ -35,19 +35,22 @@ router.post(
 
     try {
       let user = await User.findOne({ email });
+      
       if (!user) {
         return res.status(400).json({ msg: "Invalid Credentials" });
       }
+
       const isMatch = await bcrypt.compare(password, user.password);
+
       if (!isMatch) {
         return res.status(400).json({ msg: "Invalid Credentials" });
       }
       const payload = {
         user: {
           id: user.id,
-          user: user.email,
         },
       };
+
       jwt.sign(
         payload,
         config.get("jwtSecret"),
@@ -56,7 +59,7 @@ router.post(
         },
         (error, token) => {
           if (error) throw error;
-          res.json({ token, payload });
+          res.json({ token });
         }
       );
     } catch (error) {

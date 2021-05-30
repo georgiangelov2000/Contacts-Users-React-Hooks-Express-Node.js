@@ -7,8 +7,7 @@ const ContactForm = () => {
   let history = useHistory();
 
   const contactContext = useContext(ContactContext);
-  const { addContact, updateContact, clearCurrentContact, current } =
-    contactContext;
+  const { addContact, updateContact, clearCurrentContact, current } =contactContext;
 
   const [contact, setContact] = useState({
     username: "",
